@@ -12,6 +12,7 @@ let pageParser: Parser<Page->Page,Page> =
       map Counter (s "counter")
       map CounterList (s "counterlist")
       map Home (s "home")
+      map Cmdd (s "cmdd")
     ]
 
 
@@ -29,7 +30,8 @@ let init result =
         { CurrentPage = Home
           Counter = Counter.State.init()
           CounterList = CounterList.State.init()
-          Home = Home.State.init() }
+          Home = Home.State.init()
+          Cmdd = Cmdd.init() }
 
 
 let update msg (model:Model) =
@@ -43,3 +45,6 @@ let update msg (model:Model) =
     | HomeMsg msg ->
         let home = Home.State.update msg model.Home
         { model with Home =  home }, Cmd.none
+    | CmddMsg msg ->
+        let cmdd = Cmdd.update msg model.Cmdd
+        { model with Cmdd =  cmdd }, Cmd.none
