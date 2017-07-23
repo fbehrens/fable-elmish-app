@@ -48,18 +48,53 @@ JQuery.ready (fun () ->
    |> ignore
 )
 
+// Oject
+[<StringEnum>]
+type TimeUnit =
+  | Days
+  | Months
+  | Years
+
 type IAddTimeProps =
   abstract Current : DateTime with get, set
   abstract Amount : int with get, set
-  abstract Unit : string with get, set
+  abstract Unit : TimeUnit with get, set
+
 let parameter = createEmpty<IAddTimeProps>
 parameter.Current <- DateTime.Now
 parameter.Amount <- 20
-parameter.Unit <- "days"
+parameter.Unit <- TimeUnit.Days
+//console.log(parameter)
 
-console.log(parameter)
+
+// Using [<Pojo>] Attribute
+[<Pojo>]
+type Person = {
+  name : string
+  age  : int
+}
+let person = { name = "Mike"; age = 35 }
+let me = { person with name = "Zaid" }
+let stillMe = { me with age = 20 }
+
+console.log(stillMe) // { name: "Zaid", age: 20 }
 
 
+//Using a list of discriminated union as object literal
+type Person1 =
+  | Name of string
+  | Age of int
+let person1 = [ Name "Mike"; Age 35 ]
+
+
+// Creating object literals inline
+let literalObject =
+  createObj [
+    "prop" ==> "value"
+    "anotherProp" ==> 5
+  ]
+
+console.log(literalObject) // { prop: "value", "anotherProp": 5 }
 
 
 console.log("hi")
