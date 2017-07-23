@@ -76,8 +76,7 @@ type Person = {
 let person = { name = "Mike"; age = 35 }
 let me = { person with name = "Zaid" }
 let stillMe = { me with age = 20 }
-
-console.log(stillMe) // { name: "Zaid", age: 20 }
+// console.log(stillMe) // { name: "Zaid", age: 20 }
 
 
 //Using a list of discriminated union as object literal
@@ -93,8 +92,35 @@ let literalObject =
     "prop" ==> "value"
     "anotherProp" ==> 5
   ]
+//console.log(literalObject) // { prop: "value", "anotherProp": 5 }
 
-console.log(literalObject) // { prop: "value", "anotherProp": 5 }
+
+// Interacting with existing Javascript code
+let tryParseJson : string -> obj option = import "parseJson" "./custom.js"
+let tryGetValue : obj -> string -> obj option = import "getValue" "./custom.js"
+
+
+let parseJson json =
+    match tryParseJson json with
+        | Some o1 -> o1
+        | None -> failwithf "Json parsing did not succeed"
+let getValue o k =
+    match tryGetValue o k with
+        | Some v -> v
+        | None -> failwithf "Object did not have key %s" k
+
+let json = "{ \"name\": \"Frank\", \"age\": 25 }"
+let me1 = parseJson json
+console.log(me1)
+console.log( getValue me "age"  )
+
+
+// match getValue objLiteral "SpecialProp" with
+// | Some result -> console.log(result) // the value is defined, log it
+// | None -> console.log("No such property was found")
+
+
+
 
 
 console.log("hi")
