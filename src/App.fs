@@ -116,11 +116,17 @@ let me1 = parseJson json
 
 
 // Javascript from npm packages
+// pad string with char
 let leftPad : string -> int -> char -> string = importDefault "left-pad"
-let paddedNumber = leftPad "4" 4 '0'
-console.log(paddedNumber) // "0004"
+let n1 = leftPad "4" 4 '0'
+// console.log(n1) // "0004"
 
 
+// Working with overloads
+// pad string with whitespace
+let leftPadWhiteSpace : string -> int -> string = importDefault "left-pad"
+let n2 = leftPadWhiteSpace "4" 4
+console.log(n2) // "0004"
 
 
 console.log("hi")
