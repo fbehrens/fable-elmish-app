@@ -111,14 +111,14 @@ let getValue o k =
 
 let json = "{ \"name\": \"Frank\", \"age\": 25 }"
 let me1 = parseJson json
-console.log(me1)
-console.log( getValue me "age"  )
+// console.log(me1)
+// console.log( getValue me "age"  )
 
 
-// match getValue objLiteral "SpecialProp" with
-// | Some result -> console.log(result) // the value is defined, log it
-// | None -> console.log("No such property was found")
-
+// Javascript from npm packages
+let leftPad : string -> int -> char -> string = importDefault "left-pad"
+let paddedNumber = leftPad "4" 4 '0'
+console.log(paddedNumber) // "0004"
 
 
 
