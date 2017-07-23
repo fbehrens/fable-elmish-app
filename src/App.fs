@@ -3,6 +3,7 @@ module Fea
 open Fable.Core
 open Fable.Core.JsInterop
 open Fable.Import.Browser
+open System
 
 [<Emit("undefined")>]
 let undefined : obj = jsNative
@@ -41,10 +42,24 @@ let testParseFloat s =
 
 JQuery.ready (fun () ->
    JQuery.select "#main"
-   |> JQuery.css "background-color" "green"
+   //|> JQuery.css "background-color" "green"
    |> JQuery.click (fun ev -> console.log("Clicked"))
    |> JQuery.addClass "fancy-class"
    |> ignore
 )
+
+type IAddTimeProps =
+  abstract Current : DateTime with get, set
+  abstract Amount : int with get, set
+  abstract Unit : string with get, set
+let parameter = createEmpty<IAddTimeProps>
+parameter.Current <- DateTime.Now
+parameter.Amount <- 20
+parameter.Unit <- "days"
+
+console.log(parameter)
+
+
+
 
 console.log("hi")
