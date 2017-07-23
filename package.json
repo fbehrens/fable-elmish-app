@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "webpack -p",
+    "development": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

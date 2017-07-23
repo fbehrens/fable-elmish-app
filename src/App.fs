@@ -87,17 +87,26 @@ let person1 = [ Name "Mike"; Age 35 ]
 
 
 // Creating object literals inline
-let literalObject =
+let o =
   createObj [
-    "prop" ==> "value"
-    "anotherProp" ==> 5
+    "name" ==> "Frank"
+    "age" ==> 25
   ]
-//console.log(literalObject) // { prop: "value", "anotherProp": 5 }
+let age = unbox<int> o?age
+let age1 : int = !!o?age
+let age2 = !!o?age : int
 
+
+printfn "age=%O" o?age
+
+
+printfn "o=%A" o
+// printfn "age=%O" age1
 
 // Interacting with existing Javascript code
 let tryParseJson : string -> obj option = import "parseJson" "./custom.js"
 let tryGetValue : obj -> string -> obj option = import "getValue" "./custom.js"
+
 
 
 let parseJson json =
@@ -119,14 +128,15 @@ let me1 = parseJson json
 // pad string with char
 let leftPad : string -> int -> char -> string = importDefault "left-pad"
 let n1 = leftPad "4" 4 '0'
-// console.log(n1) // "0004"
+printfn "n1=%s" n1 // "0004"
 
 
 // Working with overloads
 // pad string with whitespace
 let leftPadWhiteSpace : string -> int -> string = importDefault "left-pad"
 let n2 = leftPadWhiteSpace "4" 4
-console.log(n2) // "0004"
+printfn "n2='%s'" n2 // "0004"
 
+printfn "hello"
 
 console.log("hi")
