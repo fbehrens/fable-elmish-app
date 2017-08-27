@@ -4,3 +4,4 @@ node_modules
 /obj
 /src/obj
 fea.userprefs
+.paket/paket.exe
